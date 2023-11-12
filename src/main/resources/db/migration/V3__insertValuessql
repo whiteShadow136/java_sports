@@ -1,0 +1,13 @@
+-- ----------------------------
+-- Records of sys_user
+-- ----------------------------
+INSERT INTO `sys_user` VALUES (1, 'admin', '$2a$10$H4TnTlyPD6R/hvMj0sEzseqguWzt.GzI/TtJPLgXPdEDQRbUfPDde', '阿࿆杰࿆', 0, 'https://thirdwx.qlogo.cn/mmopen/vi_32/2WrOZ9pEI713zuYictHR3UtjicKPEkVXTpeQAGVBdRBtABR5Oe6wNuT4NMg6s7wgHTjxd70kiabibKM3klMn7nUT6g/132', '', 'ouZUv5NzKIFuaNNFYM0gRVozKEDU', 1, 1, '15523285128', NULL);
+INSERT INTO `sys_user` VALUES (3, '张三', '$2a$10$PkcvdnS74lNH9f5aBKwxcutiznjhVMmjQhUHvCL.04UX3rjwDIG9O', '大哥', 0, '20210906220630安装工具.png', NULL, NULL, 1, 0, '13728287829', '1737194722@qq.com');
+
+-- ----------------------------
+-- Records of user_roles
+-- ----------------------------
+INSERT INTO `user_roles` VALUES (2, 3);
+INSERT INTO `user_roles` VALUES (3, 5);
+INSERT INTO `user_roles` VALUES (3, 1);
+

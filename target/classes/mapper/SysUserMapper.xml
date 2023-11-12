@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.mapper.SysUserMapper">
+    
+    <resultMap id="sysuser" type="org.example.entity.SysUser">
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="sex" property="sex"/>
+        <result column="avatar" property="avatar"/>
+        <result column="address" property="address"/>
+        <result column="open_id" property="openId"/>
+        <result column="status" property="status"/>
+        <result column="admin" property="admin"/>
+        <result column="phone_number" property="phoneNumber"/>
+        <result column="email" property="email"/>
+        <collection property="menus" resultMap="menuMap" select="findMenus" column="id" ofType="org.example.entity.SysMenu"/>
+    </resultMap>
+
+    <resultMap id="menuMap" type="org.example.entity.SysMenu">
+            <id column="id" property="id"/>
+            <result column="path" property="path"/>
+            <result column="icon" property="icon"/>
+            <result column="title" property="title"/>
+            <result column="component" property="component"/>
+            <result column="status" property="status"/>
+            <collection property="children" select="findChildren" column="id" ofType="org.example.entity.SysMenu"/>
+    </resultMap>
+    
+    <select id="findAll" resultType="org.example.entity.SysUser">
+        select * from sys_user;
+    </select>
+
+<!--    获取用户信息 -->
+    <select id="findByUserName" parameterType="java.lang.String" resultType="org.example.entity.SysUser">
+        select * from sys_user where user_name = #{userName};
+    </select>
+
+<!--    根据用户id查询角色信息-->
+    <select id="findRoles" parameterType="int" resultMap="roleMap">
+        select * from sys_role where id in (select role_id from sys_user where user_id = #{id})
+    </select>
+
+<!--   根据角色id查询数据权限信息-->
+    <select id="findPermission" parameterType="int" resultMap="permissionMap">
+        select * from sys_permission where id in (select permission_id from roles_permission where role_id = #{id})
+    </select>
+
+<!--    根据角色id查询菜单信息-->
+    <select id="findMenus" parameterType="int" resultMap="menuMap">
+            select * from sys_menu where id in ( select menu_id from roles_menu where role_id = #{id}) and parent_id is null
+    </select>
+
+<!--  获取子菜单信息  -->
+    <select id="findChildren" parameterType="int" resultType="org.example.entity.SysMenu">
+        select * from sys_menu where parent_id = #{id}
+    </select>
+</mapper>

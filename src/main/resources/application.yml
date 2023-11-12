@@ -1,0 +1,41 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    # 用户名
+    username: root
+    # 密码
+    password: qq844497663
+    # mysql的连接路径
+    url: jdbc:mysql://139.159.189.207:3307/sport?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    # 配置驱动类
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    enabled: true
+    spring:
+      flyway:
+        baseline-on-migrate: true
+  security:
+    user:
+      name: root
+      password: qq
+logging:
+  level:
+    root: debug
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+# jwt配置
+jwt:
+  # 请求头
+  tokenHeader: Authorization
+  # 签名加盐
+  secret: xiejinchuang123
+  # jwt过期时间
+  expiration: 1800
+  # token头部
+  tokenHead: 'Bearer '
